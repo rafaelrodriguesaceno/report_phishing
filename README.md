@@ -2,7 +2,7 @@
 
 The script was made to continuously check if the fake pages are online and report it to the hosting providers until the takedown is done
 
-### USAGE
+### Usage
 Configure the report_phishing.sh file with the credentials of the email that will be used to send notifications
 
     email_sending="xxxxxx@gmail.com"
