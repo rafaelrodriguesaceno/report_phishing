@@ -3,7 +3,7 @@
 The script was made to continuously check if the fake pages are online and report it to the hosting providers until the takedown is done
 
 - Test if the site is online
-- Detects which hosting provider the site
+- Detects the hosting provider 
 - Send email to hosting provider's @abuse requesting takedown
 - Runs again every 3 hours by default
 
