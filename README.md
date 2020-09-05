@@ -29,5 +29,5 @@ Take phishing_offline list
 aws s3 cp s3://bucket_name/phishing_offline.csv . 
 
 running  `nohup ./reports_phishing.sh`
-===============================================================
+
 
