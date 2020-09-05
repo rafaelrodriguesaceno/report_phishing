@@ -1,5 +1,4 @@
 #!/bin/bash
-
 bucket_name="report_s3_bucket"
 email_sending="XXXXXXXXX@gmail.com"
 time="10800"   #3 hours
@@ -17,7 +16,7 @@ rm -r phishing_infomation.csv
    cat domains|while read is_online
     do
     read -d, phishing < <(echo ${is_online})
-    if curl -s --head  --request GET "$phishing" | grep "200 OK" > /dev/null; then
+    if curl -I -s -L "$phishing" | grep "200"; then
     echo $phishing >>phishing_online.csv
     else
     echo $phishing >>phishing_offline.csv

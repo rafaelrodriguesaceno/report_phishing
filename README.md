@@ -18,4 +18,5 @@ Configure the report_phishing.sh file with the credentials of the email that wil
 
 Insert the suspicious domains in the **domains** file, line by line
 
+copy the **domains** and **hosted.csv** files to the bucket
 running  ` ./reports_phishing.sh`
