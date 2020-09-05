@@ -19,7 +19,7 @@ Configure the report_phishing.sh file with the credentials of the email that wil
     original_website="https://original_site.com.br"
     bucket_name="report_s3_bucket"
 
-Configure a role for aws to have permission to send and synchronize files with aws s3
+Configure a aws role to have permission to send and synchronize files with aws s3
 
 Insert the suspicious domains in the **domains** file, line by line
 aws s3 cp domains s3://bucket_name/ 
