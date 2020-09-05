@@ -2,10 +2,12 @@
 
 The script was made to continuously check if the fake pages are online and report it to the hosting providers until the takedown is done
 
-- test if the site is online
-- detects which hosting provider the site
-- send email to hosting provider's @abuse requesting takedown
-- runs again every 3 hours by default
+
+- Test if the site is online
+- Detects the hosting provider 
+- Send email to hosting provider's @abuse requesting takedown
+- Runs again every 3 hours by default
+
 
 ### Usage
 Configure the report_phishing.sh file with the credentials of the email that will be used to send notifications
