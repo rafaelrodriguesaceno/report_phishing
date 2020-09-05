@@ -25,7 +25,11 @@ Insert the suspicious domains in the **domains** file, line by line
 aws s3 cp domains s3://bucket_name/ 
 the instance will automatically synchronize this list with the bucket
 
-Take phishing_offline list 
+Insert the new abuse domains in the **hosted.csv** file, line by line
+aws s3 cp hosted.csv s3://bucket_name/ 
+the instance will automatically synchronize this list with the bucket
+
+Take offline phishing list 
 aws s3 cp s3://bucket_name/phishing_offline.csv . 
 
 running  `nohup ./reports_phishing.sh`
