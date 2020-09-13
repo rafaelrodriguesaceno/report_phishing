@@ -9,9 +9,9 @@ original_website="www.company.com"
 while [ : ]
 do
 aws s3 sync s3://$bucket_name .
-aws s3 cp phishing_offline.csv s3://bucket_name
-rm -r phishing_online.csv
-rm -r phishing_infomation.csv
+aws s3 cp phishing_offline.csv s3://$bucket_name
+#rm -r phishing_online.csv
+#rm -r phishing_infomation.csv
 #check if you are online
    cat domains.csv|while read is_online
     do
