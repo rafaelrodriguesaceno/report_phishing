@@ -1,8 +1,8 @@
 #!/bin/bash
 bucket_name="report_s3_bucket"
 email_sending="XXXXXXXXX@gmail.com"
-time="10800"   #3 hours
-user_pwd="XXXXXXXXX@gmail.com:X4sfIy5hYtbeUrHAo49W"
+time="21600"   #6 hours
+user_pwd="XXXXXXXXX@gmail.com:XXXXXXXXXX"
 security_team_name="red team"
 original_website="www.company.com"
 
@@ -13,7 +13,7 @@ aws s3 cp phishing_offline.csv s3://bucket_name
 rm -r phishing_online.csv
 rm -r phishing_infomation.csv
 #check if you are online
-   cat domains|while read is_online
+   cat domains.csv|while read is_online
     do
     read -d, phishing < <(echo ${is_online})
     if curl -I -s -L "$phishing" | grep "200"; then

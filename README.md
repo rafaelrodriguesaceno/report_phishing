@@ -32,6 +32,3 @@ the instance will automatically synchronize this list with the bucket
 Take offline phishing list 
 aws s3 cp s3://bucket_name/phishing_offline.csv . 
 
-running  `nohup ./reports_phishing.sh`
-
-
