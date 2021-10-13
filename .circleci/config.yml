@@ -1,70 +1,16 @@
-# This code is licensed from CircleCI to the user under the MIT license.
-# See here for details: https://circleci.com/developer/orbs/licensing
-commands:
-    scan:
-        description: Detect bugs and vulnerabilities
-        parameters:
-            cache_version:
-                default: 1
-                description: increment this value if the cache is corrupted and you want to start with a clean cache
-                type: integer
-            sonar_token_variable_name:
-                default: SONAR_TOKEN
-                description: the name of the environment variable where the SonarCloud API token is stored
-                type: env_var_name
-        steps:
-            - run:
-                command: mkdir -p /tmp/cache/scanner
-                name: Create cache directory if it doesn't exist
-            - restore_cache:
-                keys:
-                    - v<<parameters.cache_version>>-sonarcloud-scanner-4.1.0.1829
-            - run:
-                command: |
-                    set -e
-                    VERSION=4.1.0.1829
-                    SONAR_TOKEN=$<<parameters.sonar_token_variable_name>>
-                    SCANNER_DIRECTORY=/tmp/cache/scanner
-                    export SONAR_USER_HOME=$SCANNER_DIRECTORY/.sonar
-                    OS="linux"
-                    echo $SONAR_USER_HOME
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.2
+jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - sonarcloud/scan:
+          cache_version: 1 
+          sonar_token_variable_name: SONAR-TOKEN 
 
-                    if [[ ! -x "$SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS/bin/sonar-scanner" ]]; then
-                      curl -Ol https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$VERSION-$OS.zip
-                      unzip -qq -o sonar-scanner-cli-$VERSION-$OS.zip -d $SCANNER_DIRECTORY
-                    fi
-
-                    chmod +x $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS/bin/sonar-scanner
-                    chmod +x $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS/jre/bin/java
-
-                    $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS/bin/sonar-scanner
-                environment:
-                    SONARQUBE_SCANNER_PARAMS: '{"sonar.host.url":"https://sonarcloud.io"}'
-                name: SonarCloud
-            - save_cache:
-                key: v<<parameters.cache_version>>-sonarcloud-scanner-4.1.0.1829
-                paths: /tmp/cache/scanner
-description: Detect bugs and vulnerabilities in your repository.
-display:
-    home_url: https://www.sonarcloud.io/
-    source_url: https://github.com/SonarSource/sonarcloud-circleci-orb
-examples:
-    scan-docker:
-        description: Use the sonarcloud orb to detect bugs and vulnerabilities in your repository
-        usage:
-            jobs:
-                build:
-                    docker:
-                        - image: node:latest
-                    steps:
-                        - checkout
-                        - sonarcloud/scan
-            orbs:
-                sonarcloud: sonarsource/sonarcloud@1.0.0
-            version: 2.1
-            workflows:
-                main:
-                    jobs:
-                        - build:
-                            context: sonarcloud
-version: 2.1
+workflows:
+  example-workflow:
+    jobs:
+      - example-job
