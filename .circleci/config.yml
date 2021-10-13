@@ -1,15 +1,14 @@
 jobs:
-  build:
+  example-job:
     docker:
-      - image: 'node:latest'
+      # replace with your preferred image
+      - image: cimg/base:stable
     steps:
-      - checkout
-      - sonarcloud/scan
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.0
-version: 2.1
+      - sonarcloud/scan:
+          cache_version: 1 
+          sonar_token_variable_name: SONAR-TOKEN 
+
 workflows:
-  main:
+  example-workflow:
     jobs:
-      - build:
-          context: sonarcloud
+      - example-job
