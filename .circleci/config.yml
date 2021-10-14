@@ -9,7 +9,7 @@ jobs:
     steps:
       - snyk/scan:
           command: iac 
-          token-variable: SONAR_TOKEN 
+          token-variable: SNYK_TOKEN 
 
 workflows:
   example-workflow:
