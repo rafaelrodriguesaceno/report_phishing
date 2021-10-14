@@ -1,15 +1,16 @@
-version: 2.1
 orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.0
+  sonarcloud: sonarsource/sonarcloud@1.0.2
 jobs:
-  build:
+  example-job:
     docker:
-      - image: 'circleci/python:3.7.4'
+      # replace with your preferred image
+      - image: cimg/base:stable
     steps:
-    - checkout
-    - sonarcloud/scan
+      - sonarcloud/scan:
+          cache_version: 1 
+          sonar_token_variable_name: SONAR_TOKEN 
+
 workflows:
-  my-workflow:
+  example-workflow:
     jobs:
-      - build:
-          context: sonarcloud
+      - example-job
