@@ -1,10 +1,18 @@
 version: 2.1
 orbs:
-  orb-tools: circleci/orb-tools@10.0.5
+  snyk: snyk/snyk@1.1.1
+jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - snyk/scan:
+          command: iac 
+          token-variable: SONAR_TOKEN 
+
 workflows:
-    example-workflow:
-      jobs:
-        - orb-tools/lint
-
-
+  example-workflow:
+    jobs:
+      - example-job
           
